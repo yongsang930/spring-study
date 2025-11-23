@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/api/user")
-public class UserApiContoller {
+public class UserApiController {
 
     @OpenApi
     @PostMapping("")
@@ -18,7 +18,7 @@ public class UserApiContoller {
 
         log.info("{}",userRequest);
         return userRequest;
-
+//        throw new NumberFormatException("");
     }
 
     @GetMapping("/hello")

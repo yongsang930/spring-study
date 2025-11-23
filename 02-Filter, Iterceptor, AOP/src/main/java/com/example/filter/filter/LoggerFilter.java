@@ -13,8 +13,8 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-@Component
 @Slf4j
+//@Component
 public class LoggerFilter implements Filter {
 
 
