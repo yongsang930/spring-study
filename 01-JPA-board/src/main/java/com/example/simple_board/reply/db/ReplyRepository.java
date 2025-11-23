@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface ReplyRepository extends JpaRepository<ReplyEntity, Long> {
     List<ReplyEntity> findAllByPostIdAndStatusOrderByIdDesc(Long postId, String status);
-
-
 }

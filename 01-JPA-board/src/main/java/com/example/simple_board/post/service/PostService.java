@@ -1,10 +1,15 @@
 package com.example.simple_board.post.service;
 
+import com.example.simple_board.board.db.BoardEntity;
 import com.example.simple_board.board.db.BoardRepository;
+import com.example.simple_board.board.model.BoardDto;
 import com.example.simple_board.common.Api;
 import com.example.simple_board.common.Pagination;
+import com.example.simple_board.crud.CRUDAbstractApiController;
+import com.example.simple_board.crud.CRUDAbstractService;
 import com.example.simple_board.post.db.PostEntity;
 import com.example.simple_board.post.db.PostRepository;
+import com.example.simple_board.post.model.PostDto;
 import com.example.simple_board.post.model.PostRequest;
 import com.example.simple_board.post.model.PostViewRequest;
 import com.example.simple_board.reply.service.ReplyService;
@@ -18,8 +23,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
+public class PostService extends CRUDAbstractService<PostDto, PostEntity> {
 
+   /*
     private final PostRepository postRepository;
     private final BoardRepository boardRepository;
     private final ReplyService replyService;
@@ -99,4 +105,5 @@ public class PostService {
                         }
                 );
     }
+    */
 }

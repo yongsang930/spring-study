@@ -1,7 +1,9 @@
 package com.example.simple_board.post.controller;
 
 import com.example.simple_board.common.Api;
+import com.example.simple_board.crud.CRUDAbstractApiController;
 import com.example.simple_board.post.db.PostEntity;
+import com.example.simple_board.post.model.PostDto;
 import com.example.simple_board.post.model.PostRequest;
 import com.example.simple_board.post.model.PostViewRequest;
 import com.example.simple_board.post.service.PostService;
@@ -17,8 +19,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/post")
-public class PostApiController {
+public class PostApiController extends CRUDAbstractApiController<PostDto, PostEntity> {
 
+    /*
     private final PostService postService;
 
     @PostMapping("")
@@ -41,4 +44,5 @@ public class PostApiController {
     public void delete  (@Valid @RequestBody PostViewRequest postViewRequest){
         postService.delete(postViewRequest);
     }
+    */
 }
