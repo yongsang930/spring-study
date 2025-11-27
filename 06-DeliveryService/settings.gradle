@@ -1,3 +1,4 @@
 rootProject.name = 'DeliveryService'
 include 'api'
 include 'db'
+include 'store-admin'
