@@ -8,7 +8,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "org.delivery.db")
 @EnableJpaRepositories(basePackages = "org.delivery.db")
 public class JpaConfig {
-
-
-
 }

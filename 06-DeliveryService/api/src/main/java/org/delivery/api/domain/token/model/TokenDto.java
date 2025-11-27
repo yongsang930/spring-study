@@ -14,7 +14,5 @@ import java.time.LocalDateTime;
 public class TokenDto {
 
     private String token;
-
     private LocalDateTime expiredAt;
-
 }

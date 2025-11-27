@@ -2,9 +2,9 @@ package org.delivery.api.domain.user.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.annotation.Converter;
-import org.delivery.api.common.error.Errorcode;
+import org.delivery.api.common.api.Api;
+import org.delivery.api.common.error.ErrorCode;
 import org.delivery.api.common.exception.ApiException;
-import org.delivery.api.domain.user.business.UserBusiness;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
 import org.delivery.db.user.UserEntity;
@@ -15,32 +15,38 @@ import java.util.Optional;
 @Converter
 public class UserConverter {
 
-    public UserEntity toEntity(UserRegisterRequest req){
-        return Optional.ofNullable(req)
-                .map(it -> {
-                    return UserEntity.builder()
-                            .name(req.getName())
-                            .email(req.getEmail())
-                            .address(req.getAddress())
-                            .password(req.getPassword())
-                            .build();
-                }).orElseThrow(()-> new ApiException(Errorcode.NULL_POINT, "UserRegisterRequest NULL"));
+    public UserEntity toEntity(UserRegisterRequest request){
+
+        return Optional.ofNullable(request)
+            .map(it ->{
+                // to entity
+                return UserEntity.builder()
+                    .name(request.getName())
+                    .email(request.getEmail())
+                    .password(request.getPassword())
+                    .address(request.getAddress())
+                    .build();
+            })
+            .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT, "UserRegisterRequest Null"));
     }
 
-    public UserResponse toResponese(UserEntity userEntity){
+    public UserResponse toResponse(UserEntity userEntity) {
+
         return Optional.ofNullable(userEntity)
-                .map(it -> {
-                    return UserResponse.builder()
-                            .id(userEntity.getId())
-                            .name(userEntity.getName())
-                            .status(userEntity.getStatus())
-                            .email(userEntity.getEmail())
-                            .address(userEntity.getAddress())
-                            .registeredAt(userEntity.getRegisteredAt())
-                            .unregisteredAt(userEntity.getUnregisteredAt())
-                            .lastLoginAt(userEntity.getLastLoginAt())
-                            .build();
-                }).orElseThrow(() -> new ApiException(Errorcode.NULL_POINT, "UserEntity NULL"));
-    }
+            .map(it ->{
+                // to response
+                return UserResponse.builder()
+                    .id(userEntity.getId())
+                    .name(userEntity.getName())
+                    .status(userEntity.getStatus())
+                    .email(userEntity.getEmail())
+                    .address(userEntity.getAddress())
+                    .registeredAt(userEntity.getRegisteredAt())
+                    .unregisteredAt(userEntity.getUnregisteredAt())
+                    .lastLoginAt(userEntity.getLastLoginAt())
+                    .build();
+            })
+            .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT, "UserEntity Null"));
 
+    }
 }

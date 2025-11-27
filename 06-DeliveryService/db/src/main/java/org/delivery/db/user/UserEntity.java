@@ -1,10 +1,7 @@
 package org.delivery.db.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
 import org.delivery.db.user.enums.UserStatus;
@@ -12,12 +9,12 @@ import org.delivery.db.user.enums.UserStatus;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = true)
 public class UserEntity extends BaseEntity {
 
     @Column(length = 50, nullable = false)
@@ -41,8 +38,5 @@ public class UserEntity extends BaseEntity {
     private LocalDateTime unregisteredAt;
 
     private LocalDateTime lastLoginAt;
-
-
-
 
 }

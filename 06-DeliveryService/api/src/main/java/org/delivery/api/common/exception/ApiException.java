@@ -1,14 +1,12 @@
 package org.delivery.api.common.exception;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.error.ErrorCodeIfs;
 
 @Getter
-public class ApiException extends RuntimeException implements ApiExceptionIfs{
+public class ApiException extends RuntimeException implements ApiExceptionIfs {
 
     private final ErrorCodeIfs errorCodeIfs;
-
     private final String errorDescription;
 
     public ApiException(ErrorCodeIfs errorCodeIfs){

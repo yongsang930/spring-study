@@ -10,60 +10,63 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
 
-@Component
 @Slf4j
+@Component
 public class LoggerFilter implements Filter {
-
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        var req = new ContentCachingRequestWrapper((HttpServletRequest) request);
-        var res = new ContentCachingResponseWrapper((HttpServletResponse) response);
+        var req = new ContentCachingRequestWrapper( (HttpServletRequest) request );
+        var res = new ContentCachingResponseWrapper( (HttpServletResponse) response );
+
         log.info("INIT URI : {}", req.getRequestURI());
 
         chain.doFilter(req, res);
 
+
         // request 정보
         var headerNames = req.getHeaderNames();
-        var reqHeaderValues = new StringBuilder();
+        var headerValues = new StringBuilder();
 
-        headerNames.asIterator().forEachRemaining(headerKey -> {
+        headerNames.asIterator().forEachRemaining(headerKey ->{
             var headerValue = req.getHeader(headerKey);
 
-            reqHeaderValues
-                    .append("[")
-                    .append(headerKey)
-                    .append(" : ")
-                    .append(headerValue)
-                    .append("]");
+            // authorization-token : ??? , user-agent : ???
+            headerValues
+                .append("[")
+                .append(headerKey)
+                .append(" : ")
+                .append(headerValue)
+                .append("] ");
         });
 
         var requestBody = new String(req.getContentAsByteArray());
         var uri = req.getRequestURI();
         var method = req.getMethod();
 
-        log.info(">>>> uri: {}, method : {}, header: {}, body :{}", uri, method, reqHeaderValues, requestBody);
+        log.info(">>>>> uri : {} , method : {} , header : {} , body : {}", uri, method, headerValues, requestBody);
+
 
         // response 정보
-        var resHeaderValues = new StringBuilder();
+        var responseHeaderValues = new StringBuilder();
 
-        res.getHeaderNames().forEach(headerKey -> {
+        res.getHeaderNames().forEach(headerKey ->{
             var headerValue = res.getHeader(headerKey);
 
-            resHeaderValues
-                    .append("[")
-                    .append(headerKey)
-                    .append(" : ")
-                    .append(headerValue)
-                    .append("]");
+            responseHeaderValues
+                .append("[")
+                .append(headerKey)
+                .append(" : ")
+                .append(headerValue)
+                .append("] ");
         });
 
         var responseBody = new String(res.getContentAsByteArray());
 
-        log.info("<<<< uri: {}, method : {}, header:{}, body :{}", uri, method, resHeaderValues, responseBody);
+        log.info("<<<<< uri : {} , method : {} , header : {} , body : {}", uri, method, responseHeaderValues, responseBody);
+
 
         res.copyBodyToResponse();
-
     }
 }
